@@ -1,8 +1,6 @@
 package com.mycompany.jmavsimtelemetrics;
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.util.Scanner;
+import java.net.URL;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -14,11 +12,10 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
     
-    private ConcurrentLinkedQueue<Message> queue = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<Message> queue = new ConcurrentLinkedQueue<>();
     
     @Override
     public void start(Stage stage) throws Exception {
-        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
         Parent root = loader.load();
         

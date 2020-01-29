@@ -30,9 +30,9 @@ public class Message {
         messageId = data[5];
         payload = new byte[payloadLength];
         
-        for(int i = 6; i < length - 2; i++) 
+        for(int i = 0; i < payloadLength; i++) 
         {
-            payload[i - 6] = data[i];
+            payload[i] = data[i + 6];
         }
         
         crc = (short)(data[length - 2] << 8 | data[length - 1]);
@@ -58,5 +58,41 @@ public class Message {
         }
         
         return ret.append("]\n").toString();
+    }
+
+    public byte getPayloadLength() {
+        return payloadLength;
+    }
+
+    public byte getSystemId() {
+        return systemId;
+    }
+
+    public byte getComponentId() {
+        return componentId;
+    }
+
+    public byte getMessageId() {
+        return messageId;
+    }
+
+    public byte[] getPayload() {
+        return payload;
+    }
+
+    public short getCrc() {
+        return crc;
+    }
+    
+    public float getFloat(int offset) {
+        return (float)(payload[offset] << 24 | payload[offset + 1] << 16 | payload[offset + 2] << 8 | payload[offset + 3]);
+    }
+    
+    public int getInt(int offset) {
+        return (int)(payload[offset] << 24 | payload[offset + 1] << 16 | payload[offset + 2] << 8 | payload[offset + 3]);
+    }
+    
+    public short getInt16(int offset) {
+        return (short)(payload[offset] << 8 | payload[offset + 1]);
     }
 }
